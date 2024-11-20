@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "three": "~0.168.0",
+    "@react-three/fiber": "latest",
+    "@react-three/drei": "latest",
+    "@react-three/xr": "latest",
+    "vite": "^5.4.11",
+    "@vitejs/plugin-react": "^4.3.3",
+    "@vitejs/plugin-basic-ssl": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^4.0.0"
+  },
+  "main": "/index.tsx",
+  "scripts": {
+    "dev": "vite --host"
+  }
+}
