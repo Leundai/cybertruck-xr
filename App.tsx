@@ -1,28 +1,15 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useState, useRef } from "react";
-import {
-  Bvh,
-  Environment,
-  Grid,
-  PerspectiveCamera,
-  Sky,
-} from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Environment, PerspectiveCamera, Sky } from "@react-three/drei";
 import { createXRStore, XR } from "@react-three/xr";
-import { Mesh } from "three";
 import ControlledXROrigin from "./components/controlled-position";
 import TeslaModel from "./components/tesla-model";
-import { ColorPicker } from "./components/color-picker";
-import { Ground } from "./components/ground";
+import ColorPicker from "./components/color-picker";
+import Ground from "./components/ground";
+import { DEFAULT_CAMERA_POSITION } from "./utils/defaults";
 
 export default function App() {
   const store = createXRStore({
     emulate: { inject: true },
-    hand: {
-      grabPointer: false,
-      touchPointer: false,
-      rayPointer: { minDistance: 0 },
-    },
-    controller: { grabPointer: false, rayPointer: { minDistance: 0 } },
   });
 
   return (
@@ -37,9 +24,13 @@ export default function App() {
         <XR store={store}>
           <Environment preset="park" />
           <Sky sunPosition={[100, 20, 100]} />
-          <PerspectiveCamera makeDefault position={[1, 0, 2]} fov={90} />
           <Ground />
-          <group position={[0, 0, 0]} scale={1.4}>
+          <PerspectiveCamera
+            makeDefault
+            position={DEFAULT_CAMERA_POSITION.clone()}
+            fov={90}
+          />
+          <group position={[2, 0, 2]} scale={1.4}>
             <TeslaModel />
           </group>
           <ColorPicker />
@@ -47,17 +38,5 @@ export default function App() {
         </XR>
       </Canvas>
     </>
-  );
-}
-
-function MyComponent() {
-  const [red, setRed] = useState(true);
-  const ref = useRef<Mesh>(null);
-  useFrame(() => ref.current?.rotateY(0.01));
-  return (
-    <mesh ref={ref} onClick={() => setRed(!red)} position={[0, 0, 0]}>
-      <boxGeometry />
-      <meshBasicMaterial color={red ? "red" : "blue"} />
-    </mesh>
   );
 }

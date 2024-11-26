@@ -1,12 +1,13 @@
+import { Matrix4, Vector3 } from "three";
 import { create } from "zustand";
 import { combine } from "zustand/middleware";
 
-const initialColorState = {
+const initialColorPickerState = {
   selected: undefined as undefined | string,
 };
 
 export const useColorStore = create(
-  combine(initialColorState, (set) => ({
+  combine(initialColorPickerState, (set) => ({
     setColor(name: string, value: string) {
       set({ [name]: value });
     },
